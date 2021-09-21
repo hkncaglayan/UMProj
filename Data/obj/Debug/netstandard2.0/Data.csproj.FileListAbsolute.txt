@@ -1,0 +1,4 @@
+C:\Users\BARISAKBORU\source\repos\UserManagement\Data\obj\Debug\netstandard2.0\Data.csprojAssemblyReference.cache
+C:\Users\BARISAKBORU\source\repos\UserManagement\Data\obj\Debug\netstandard2.0\Data.AssemblyInfoInputs.cache
+C:\Users\BARISAKBORU\source\repos\UserManagement\Data\obj\Debug\netstandard2.0\Data.AssemblyInfo.cs
+C:\Users\BARISAKBORU\source\repos\UserManagement\Data\obj\Debug\netstandard2.0\Data.csproj.CoreCompileInputs.cache

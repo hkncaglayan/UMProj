@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+@using Entities.ResponseObject;
+@using Entities;
+@model UserModel
+<div class="container-fluid px-4">
+    <h1 class="mt-4"></h1>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+    </svg>
+    <div class="card mb-4">
+        <div class="card-header"><h5 class="mt-1">Kullanıcı Detayları</h5></div>      
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item">@Html.ActionLink("Kullanıcı Listesi", "UserList")</li>
+                    <li class="breadcrumb-item active">Kullancı Detayları</li>
+                </ol>
+                <hr />
+                <div class="input-group">
+                    <div class="col-lg-12">
+                        @if (ViewBag.SuccessMsg != null)
+                        {
+                            <div class="alert alert-success d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+                                <div>
+                                    An example success alert with an icon
+                                </div>
+                            </div>
+                        }
+                        else if (ViewBag.ErrorMsg != null)
+                        {
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+                                <div>
+                                    An example danger alert with an icon
+                                </div>
+                            </div>
+                        }
+                        else if (ViewBag.WaringMsg != null)
+                        {
+                            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+                                <div>
+                                    An example warning alert with an icon
+                                </div>
+                            </div>
+                        }
+                        @if (ViewContext.ViewData.ModelState.Where(x => x.Key == "").Any())
+                        {
+                            @Html.ValidationSummary(true, "")
+                        }
+                    </div>
+                </div>
+                <!-- Form Row-->
+                <div class="row gx-3 mb-3">
+                    <!-- Form Group (first name)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtFirstName">Adı</label>
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", type = "text", placeholder = "Kullanıcı adı" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</span>
+                    </div>
+                    <!-- Form Group (last name)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtLastName">Soyadı</label>
+                        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", type = "text", placeholder = "Kullanıcı soyadı" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })</span>
+                    </div>
+                </div>
+                <!-- Form Row-->
+                <div class="row gx-3 mb-3">
+                    <!-- Form Group (email address)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtEmail">Email adresi</label>
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "text", placeholder = "Kullanıcıya ait email adresi" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtPassword">Parola</label>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "text", placeholder = "Kullanıcı parolası" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })</span>
+                    </div>
+                </div>
+                <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="small mb-1">Kullanıcı Rolü</label>
+                        @Html.DropDownListFor(model => model.Role, new SelectList(Model.UserRoles), "Rol Seçiniz", new { @class = "form-control dropdown" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })</span>
+                    </div>
+                </div>
+                <!-- Form Row-->
+                <div class="row gx-3 mb-3">
+                    <!-- Form Group (phone number)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtPhoneNumber">Telefon Numarası</label>
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", type = "text", placeholder = "Kullanıcıya ait telefon numarası" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })</span>
+                    </div>
+                    <!-- Form Group (birthday)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtDateOfBirth">Doğum Tarihi</label>
+                        @Html.TextBoxFor(model => model.DateOfBirth, "{0:dd.MM.yyyy}", new { @class = "form-control", type = "date", placeholder = "Gün.Ay.Yıl", min = DateTime.Today.AddYears(-100), max = DateTime.Today })
+                        @*@Html.TextBox("txtDateOfBirth", Model.DateOfBirth.ToString("dd.MM.yyyy"), new { @class = "form-control", type = "text", placeholder = "Kullanıcıya ait doğum tarihi" })*@
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })</span>
+                    </div>
+                </div>
+                <div class="col-mb-3">
+                    <label class="small mb-1" for="txtAddress">Adres</label>
+                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control", row = "3", placeholder = "Kullanıcıya ait adres bilgisi" })
+                    <span class="help-block"> @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })</span>
+                </div>
+                <hr />
+                <!-- Save changes button-->
+                <button class="btn btn-primary" type="submit">Kaydet</button>
+                <button class="btn btn-danger" type="button">İptal</button>
+            }
+        </div>
+    </div>
+    @*<div style="height: 100vh"></div>*@
+</div>

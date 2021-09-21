@@ -1,0 +1,77 @@
+﻿@using BussinessLayer;
+@using Entities;
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+@model List<User>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.2/r-2.2.9/sb-1.2.1/sl-1.3.3/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.2/r-2.2.9/sb-1.2.1/sl-1.3.3/datatables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblUserList').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.11.2/i18n/tr.json"
+            }
+        });
+    });    
+</script>
+<div class="container-fluid px-4">
+    <h1 class="mt-4"></h1>
+
+    <div class="card mb-4">
+        <div class="card-header"><h5 class="mt-1">Kullanıcı Listesi</h5></div>
+
+        <div class="card-body loadingAnimation">
+            <form>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Kullanıcı Listesi</li>
+                </ol>
+                <hr />
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    @Html.ActionLink("Kullanıcı Ekle", "Create", "User", new { @class = "btn btn-primary" })
+                </div>
+                <br />
+                <table id="tblUserList" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Ad</th>
+                            <th>Soyad</th>
+                            <th>Email</th>
+                            <th>Telefon Numarası</th>
+                            <th>Adres</th>
+                            <th>Rol</th>
+                            <th>Detay</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="@item.Id">
+                                <td><span class="fa fa-user"></span> @item.Name</td>
+                                <td>@item.Surname</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>@item.Email</td>
+                                <td>
+                                    @if (item.Address.Length > 15)
+                                    {
+                                        @(item.Address.Substring(0, 15)+" "+"...")                                        
+                                    }
+                                    else
+                                    {
+                                        @item.Address
+                                    }
+                                </td>
+                                <td><span class="badge bg-danger rounded-pill"> @item.Role</span></td>
+                                <td>
+                                    <a href="/Users/Edit/@item.Id" class="btn btn-warning btn-sm"><span class="fa fa-edit"></span></a>
+                                    <a href="#" class="btn btn-danger btn-sm" onclick="DeleteConfirmation(@item.Id,true,'/Users/DeleteItem/'+@item.Id,'');"><span class="fa fa-trash"></span></a>                                   
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+    @*<div style="height: 100vh"></div>*@
+</div>

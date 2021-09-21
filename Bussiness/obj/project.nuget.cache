@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "2w6x2ogQDluvq1eUnPoSxFmU8D6VE8vNkvYfIN8jlaHrroEEOKGlfjd27dNRwWfl5SGFbbVKY3FpTeflhDRN4w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\BARISAKBORU\\source\\repos\\UserManagement\\Bussiness\\Bussiness.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\BARISAKBORU\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

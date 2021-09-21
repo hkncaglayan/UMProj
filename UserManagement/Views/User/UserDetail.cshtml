@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+@using Entities.ResponseObject;
+@using Entities;
+@model UserModel
+<div class="container-fluid px-4">
+    <h1 class="mt-4"></h1>
+
+    <div class="card mb-4">
+        <div class="card-header"><h5 class="mt-1">Kullanıcı Detayları</h5></div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item">@Html.ActionLink("Kullanıcı Listesi", "UserList")</li>
+                    <li class="breadcrumb-item active">Kullancı Detayları</li>
+                </ol>
+                <hr />
+                <div class="input-group">
+                    <div class="col-lg-12">
+                        @if (ViewContext.ViewData.ModelState.Where(x => x.Key == "").Any())
+                        {
+                            @Html.ValidationSummary(true, "")
+                        }
+                    </div>
+                </div>
+                <!-- Form Row-->
+                <div class="row gx-3 mb-3">
+                    <!-- Form Group (first name)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtFirstName">Adı</label>
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", type = "text", placeholder = "Kullanıcı adı" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</span>
+                    </div>
+                    <!-- Form Group (last name)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtLastName">Soyadı</label>
+                        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", type = "text", placeholder = "Kullanıcı soyadı" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })</span>
+                    </div>
+                </div>
+                <!-- Form Row-->
+                <div class="row gx-3 mb-3">
+                    <!-- Form Group (email address)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtEmail">Email adresi</label>
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "text", placeholder = "Kullanıcıya ait email adresi" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtPassword">Parola</label>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "text", placeholder = "Kullanıcı parolası" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })</span>
+                    </div>
+                </div>
+                <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="small mb-1">Kullanıcı Rolü</label>
+                        @Html.DropDownListFor(model => model.Role, new SelectList(Model.UserRoles), "Rol Seçiniz", new { @class = "form-control dropdown" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })</span>
+                    </div>
+                </div>
+                <!-- Form Row-->
+                <div class="row gx-3 mb-3">
+                    <!-- Form Group (phone number)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtPhoneNumber">Telefon Numarası</label>
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", type = "text", placeholder = "Kullanıcıya ait telefon numarası" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })</span>
+                    </div>
+                    <!-- Form Group (birthday)-->
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="txtDateOfBirth">Doğum Tarihi</label>
+                        @Html.TextBoxFor(model => model.DateOfBirth, "{0:dd.MM.yyyy}", new { @class = "form-control", type = "date" })
+                        <span class="help-block"> @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })</span>
+                    </div>
+                </div>
+                <div class="col-mb-3">
+                    <label class="small mb-1" for="txtAddress">Adres</label>
+                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control", row = "3", placeholder = "Kullanıcıya ait adres bilgisi" })
+                    <span class="help-block"> @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })</span>
+                </div>
+                <hr />
+                <!-- Save changes button-->
+                <button class="btn btn-primary" type="submit">Güncelle</button>
+                <a href="@Url.Action("DeleteUser")" onclick="return confirm('Bu kullanıcıyı silmek istediğinizden emin misiniz?');" class="btn btn-danger"><span class="fa fa-trash"></span>&nbsp;Sil</a>                
+            }
+        </div>
+    </div>
+    @*<div style="height: 100vh"></div>*@
+</div>

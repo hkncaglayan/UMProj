@@ -1,0 +1,3 @@
+C:\Users\BARISAKBORU\source\repos\UserManagement\Bussiness\obj\Debug\netstandard2.0\Bussiness.AssemblyInfoInputs.cache
+C:\Users\BARISAKBORU\source\repos\UserManagement\Bussiness\obj\Debug\netstandard2.0\Bussiness.AssemblyInfo.cs
+C:\Users\BARISAKBORU\source\repos\UserManagement\Bussiness\obj\Debug\netstandard2.0\Bussiness.csproj.CoreCompileInputs.cache
